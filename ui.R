@@ -1,28 +1,88 @@
-# Define UI for simulating power for a sample size calculation
+# Define UI for PTA prediction
 shinyUI(
     pageWithSidebar(  
         # Application title
-        headerPanel("Power calculations for an AD trial"),
+        headerPanel("PTA estimator"),
         sidebarPanel(
-            h4("Enter simulation settings, the defaults are estimated from our analysis of ADNI"),
-            numericInput("beta1", "Yearly increase in CDR SB for diseased group", 0.924, min = 0, max = 2, step = .001),
-            numericInput("perd", "Percent decrease in the incline in CDR SB for treated group expressed as a proportion (example to consider a 30% decrease, going from a 1.0 mean yearly increase in CDR SB to 0.7, enter 0.30)", 0.30, min = 0.01, max = 1.0, step = .01 ),
-            numericInput("sigma0", "Random intercept standard deviation (remember to express as sd)", 0.762, min = 0, max = 2, step = .01),
-            numericInput("sigma1", "Random slope standard deviation (remember to express as a sd)", 0.844, min = 0, max = 2, step = .01),
-            numericInput("sigma", "Error standard deviation (remember to express as a sd)", 0.628, min = 0.1, max = 2, step = .1),
-            numericInput("cor12", "Correlation between RI and RS", 0.297, min = -1, max = 1, step = .1),
-            selectInput("method", "Simulated and fitted model:",
-                        list("Random intercept and slope" = "rirs", 
-                             "Random slope only" = "rs", 
-                             "Random intercept only" = "ri")),
-            numericInput("m", "Number of equally spaced visits, 2 for only baseline and followup", 3, min = 2, step = 1),
-            numericInput("yrs", "Total length of trial in years", 1, min = .5, step = .5),
-            numericInput("nosim", "Number of simulations to run. Use 10 to test things out, 100 for preliminary results and at least 1,000 for final results", 10, min = 100, step = 100),
+          h4("Enter subject characteristics"),
+           selectInput("race", "Race",
+                       list("Unknown = 0" = 0, 
+                            "White 1" = 1, 
+                            "Black 2" = 2,
+                            "What are the other codes ?" = 3)
+                       ),
+            selectInput("gender", "Gender",
+                       list("Female = 0 " = 0, 
+                            "Male = 1" = 1)
+                       ),
+            numericInput("age", "Age in months", 0.924, min = 3, max = 19, step = .1),
+            numericInput("GCS", "GSC", 5, min = 3, max = 15, step = 1),
+            numericInput("TFC", "TFC", 9, min = 0, max = 130, step = 1),
+            selectInput("codedInj", "Coded Injury",
+                            list(
+                                     "Unknown" = NA,
+                                     "Whatever 0 is" = 0,
+                                     "Whatever 1 is" = 1,
+                                     "Whatever 3 is " = 3,
+                                     "Whatever 4 is " = 4
+                            )
+                        ),
+            selectInput("dichsurgint", "What is dichsurgint?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                ),
+            selectInput("dichskullfx", "What is dichskullfx?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                        ),
+            selectInput("dichopen", "What is rdichopen?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                        ),
+           selectInput("trichsidelesion", "What is trichsidelesion?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1,
+                                "Whatever 2 is" = 2
+                            )
+                        ),
+            selectInput("codedlesloc", "What is codedlesloc?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1,
+                                "Whatever 2 is" = 2,
+                                "Whatever 3 is" = 3,
+                                "Whatever 4 is" = 4
+                            )
+                        ),
+            selectInput("simplifieddepth", "What is simplifieddepth?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                        ),
+            selectInput("dichhema", "What is dichhema?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                        ),
+            selectInput("dichpreinjurydx", "What is dichpreinjurydx?",
+                        list(
+                                "Whatever 0 is" = 0,
+                                "Whatever 1 is" = 1
+                            )
+                        ),
             submitButton("Submit")
         ),
         mainPanel(
-            h3('Results of simulation'),
-            h4('Your trial has visit times in years'),
+            h3('Results of estimation'),
             verbatimTextOutput("summary")
             
           )
