@@ -23,6 +23,20 @@ library(randomForest)
 #impute data, build forest, make prediction
 #dataset used for prediction labeled preddat in the following function
 #all vars in dataset are used for prediction - change if necessary
+
+dat.imp<-rfImpute(time ~ ., data=dat)
+bestFit <- randomForest(time ~ ., data = dat.imp, ntree = 500)
+rm(dat.imp)
+
+bsFit <- sapply(1 : 1000,
+    function(i){    
+        dat.sample<-dat[sample(nrow(dat), replace=TRUE),]
+	    dat.imp<-rfImpute(time ~ ., data=dat.sample)
+        return(randomForest(time ~ ., data = dat.imp, ntree=500))        
+    }
+)
+save(bestFit, file = "fittedModels.rda")
+
 predictions <- vector("list", 1000)
 for(i in 1:1000) {
 	dat.sample<-dat[sample(nrow(dat), replace=TRUE),]
