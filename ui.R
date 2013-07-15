@@ -2,7 +2,7 @@
 shinyUI(
     pageWithSidebar(  
         # Application title
-        headerPanel("PTA estimator"),
+        headerPanel("Post-traumatic amnesia"),
         sidebarPanel(
           h4("Enter subject characteristics"),
            selectInput("race", "Race",
@@ -15,71 +15,71 @@ shinyUI(
                             "Male = 1" = "1")
                        ),
             numericInput("age", "Age in months", 0.9, min = 0.1, max = 19, step = .1),
-            numericInput("GCS", "GSC", 5, min = 3, max = 15, step = 1),
-            numericInput("TFC", "TFC", 9, min = 0, max = 130, step = 1),
-            selectInput("codedinj", "Coded Injury",
+            numericInput("GCS", "Initial Glasgow Coma Scale", 5, min = 3, max = 15, step = 1),
+            numericInput("TFC", "Time to follow two motor commands in days", 9, min = 0, max = 130, step = 1),
+            selectInput("codedinj", "Mechanism of injury",
                             list(
-                                     "Whatever 0 is" =  "0",
-                                     "Whatever 1 is" =  "1",
-                                     "Whatever 3 is " = "3",
-                                     "Whatever 4 is " = "4"
+                                     "Pedestrian struck" =  "0",
+                                     "Passenger in MVC" =  "1",
+                                     "WHAT IS 3" = "3",
+                                     "Fall" = "4"
                             )
                         ),
-            selectInput("dichsurgint", "What is dichsurgint?",
+            selectInput("dichsurgint", "Required urgent surgical intervention (placement of ICP monitor alone does not count)",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "No" = "0",
+                                "Yes" = "1"
                             )
                 ),
-            selectInput("dichskullfx", "What is dichskullfx?",
+            selectInput("dichskullfx", "Skull fracture",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "No" = "0",
+                                "Yes" = "1"
                             )
                         ),
-            selectInput("dichopen", "What is rdichopen?",
+            selectInput("dichopen", "Open TBI (at minimum, dural tear present)",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "No" = "0",
+                                "Yes" = "1"
                             )
                         ),
-           selectInput("trichsidelesion", "What is trichsidelesion?",
+           selectInput("trichsidelesion", "Lesion location",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1",
-                                "Whatever 2 is" = "2"
+                                "Right hemisphere" = "0",
+                                "Left hemisphere" = "1",
+                                "Bilateral" = "2"
                             )
                         ),
-            selectInput("codedlesloc", "What is codedlesloc?",
+            selectInput("codedlesloc", "Depth of deepest lesion",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1",
-                                "Whatever 2 is" = "2",
-                                "Whatever 3 is" = "3",
-                                "Whatever 4 is" = "4"
+                                "Frontotemporal cortex" = "0",
+                                "Corpus callosum" = "1",
+                                "Basal ganglia" = "2",
+                                "Thalamus" = "3",
+                                "Cerebellum / brainstem" = "4"
                             )
                         ),
-            selectInput("simplifieddepth", "What is simplifieddepth?",
+            selectInput("simplifieddepth", "Simplied depth - depth of deepest lesion",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "Cortical only" = "0",
+                                "Corpus callosum, basal ganglia, thalamus or cerebellum / brainstem" = "1"
                             )
                         ),
-            selectInput("dichhema", "What is dichhema?",
+            selectInput("dichhema", "Presence or absence of intracranial bleed",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "No" = "0",
+                                "Yes" = "1"
                             )
                         ),
-            selectInput("dichpreinjurydx", "What is dichpreinjurydx?",
+            selectInput("dichpreinjurydx", "Presence or absence of pre-injury learning, behavior, or developmental concerns",
                         list(
-                                "Whatever 0 is" = "0",
-                                "Whatever 1 is" = "1"
+                                "No" = "0",
+                                "Yes" = "1"
                             )
                         )
         ),
         mainPanel(
-            actionButton("go", "Click here to get the prediction"),
+            #actionButton("go", "Click here to get the prediction"),
             h3('Results of estimation'),
             verbatimTextOutput("rfPrediction")
           )

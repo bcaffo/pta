@@ -6,8 +6,8 @@ load("fittedModels.rda")
 shinyServer(
     function(input, output) {  
         output$rfPrediction <- renderPrint({
-            if (input$go == 0) return(cat(""))
-            else{
+            #if (input$go == 0) return(cat(""))
+            #else{
                 newdata <- data.frame(
                             race = factor(input$race, levels = as.character(c(0, 1, 2, 3, 5, 6))),
                             gender = factor(input$gender, levels = c("0", "1")),
@@ -24,7 +24,7 @@ shinyServer(
                              dichpreinjurydx = factor(input$dichpreinjurydx, levels = c("0", "1")),
                              age = input$age)
                isolate(cat( predict(bestFit, newdata = newdata) ))
-            }
+            #}
             })
     }
 )        
