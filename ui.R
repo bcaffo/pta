@@ -14,7 +14,7 @@ shinyUI(
                        list("Female = 0 " = "0", 
                             "Male = 1" = "1")
                        ),
-            numericInput("age", "Age in months", 0.924, min = 3, max = 19, step = .1),
+            numericInput("age", "Age in months", 0.9, min = 0.1, max = 19, step = .1),
             numericInput("GCS", "GSC", 5, min = 3, max = 15, step = 1),
             numericInput("TFC", "TFC", 9, min = 0, max = 130, step = 1),
             selectInput("codedinj", "Coded Injury",
