@@ -6,7 +6,7 @@ shinyUI(
         sidebarPanel(
           h4("Enter subject characteristics"),
            selectInput("race", "Race",
-                       list("Unknown = 0" = 0, 
+                       list( 
                             "White 1" = 1, 
                             "Black 2" = 2,
                             "What are the other codes ?" = 3)
@@ -18,9 +18,8 @@ shinyUI(
             numericInput("age", "Age in months", 0.924, min = 3, max = 19, step = .1),
             numericInput("GCS", "GSC", 5, min = 3, max = 15, step = 1),
             numericInput("TFC", "TFC", 9, min = 0, max = 130, step = 1),
-            selectInput("codedInj", "Coded Injury",
+            selectInput("codedinj", "Coded Injury",
                             list(
-                                     "Unknown" = NA,
                                      "Whatever 0 is" = 0,
                                      "Whatever 1 is" = 1,
                                      "Whatever 3 is " = 3,
@@ -78,13 +77,12 @@ shinyUI(
                                 "Whatever 0 is" = 0,
                                 "Whatever 1 is" = 1
                             )
-                        ),
-            submitButton("Submit")
+                        )
         ),
         mainPanel(
+            actionButton("go", "Click here to run the simulation"),
             h3('Results of estimation'),
-            verbatimTextOutput("summary")
-            
+            verbatimTextOutput("rfPrediction")
           )
     )
 )
