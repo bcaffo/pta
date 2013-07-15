@@ -9,19 +9,19 @@ shinyServer(
             if (input$go == 0) return(cat(""))
             else{
                 newdata <- data.frame(
-                            race = as.factor(input$race),
-                            gender = as.factor(input$gender),
+                            race = factor(input$race, levels = as.character(c(0, 1, 2, 3, 5, 6))),
+                            gender = factor(input$gender, levels = c("0", "1")),
                             GCS = input$GCS,
                             TFC = input$TFC,
-                             codedinj = as.factor(input$codedinj),
-                             dichsurgint = as.factor(input$dichsurgint),
-                             dichskullfx = as.factor(input$dichskullfx),
-                             dichopen = as.factor(input$dichopen),
-                             trichsidelesion = as.factor(input$trichsidelesion),
-                             codedlesloc = as.factor(input$codedlesloc),
-                             simplifieddepth = as.factor(input$simplifieddepth),
-                             dichhema = as.factor(input$dichhema),
-                             dichpreinjurydx = as.factor(input$dichpreinjurydx),
+                             codedinj = factor(input$codedinj, levels = c("0", "1", "3", "4")),
+                             dichsurgint = factor(input$dichsurgint, levels = c("0", "1")),
+                             dichskullfx = factor(input$dichskullfx, levels = c("0", "1")),
+                             dichopen = factor(input$dichopen, levels = c("0", "1")),
+                             trichsidelesion = factor(input$trichsidelesion, levels = c("0", "1", "2")),
+                             codedlesloc = factor(input$codedlesloc, levels = c("0", "1", "2","3", "4") ),
+                             simplifieddepth = factor(input$simplifieddepth, levels = c("0", "1")),
+                             dichhema = factor(input$dichhema, levels = c("0", "1")),
+                             dichpreinjurydx = factor(input$dichpreinjurydx, levels = c("0", "1")),
                              age = input$age)
                isolate(cat( predict(bestFit, newdata = newdata) ))
             }
