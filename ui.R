@@ -79,7 +79,7 @@ shinyUI(
                         )
         ),
         mainPanel(
-            actionButton("go", "Click here to run the simulation"),
+            actionButton("go", "Click here to get the prediction"),
             h3('Results of estimation'),
             verbatimTextOutput("rfPrediction")
           )
