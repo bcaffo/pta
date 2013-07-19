@@ -8,6 +8,7 @@ shinyServer(
         output$rfPrediction <- renderPrint({
             #if (input$go == 0) return(cat(""))
             #else{
+                simplifieddepth <- 1 - (input$codedlesloc == "0")
                 newdata <- data.frame(
                             race = factor(input$race, levels = as.character(c(0, 1, 2, 3, 5, 6))),
                             gender = factor(input$gender, levels = c("0", "1")),
@@ -19,11 +20,11 @@ shinyServer(
                              dichopen = factor(input$dichopen, levels = c("0", "1")),
                              trichsidelesion = factor(input$trichsidelesion, levels = c("0", "1", "2")),
                              codedlesloc = factor(input$codedlesloc, levels = c("0", "1", "2","3", "4") ),
-                             simplifieddepth = factor(input$simplifieddepth, levels = c("0", "1")),
+                             simplifieddepth = simplifieddepth,
                              dichhema = factor(input$dichhema, levels = c("0", "1")),
                              dichpreinjurydx = factor(input$dichpreinjurydx, levels = c("0", "1")),
                              age = input$age)
-               isolate(cat( predict(bestFit, newdata = newdata) ))
+               isolate(cat( predict(bestFit, newdata = newdata), simplifieddepth ))
             #}
             })
     }

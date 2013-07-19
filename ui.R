@@ -2,7 +2,7 @@
 shinyUI(
     pageWithSidebar(  
         # Application title
-        headerPanel("Post-traumatic amnesia"),
+        headerPanel("Emergence from pediatric post traumatic amnesia calculator"),
         sidebarPanel(
           h4("Enter subject characteristics"),
            selectInput("race", "Race",
@@ -14,18 +14,18 @@ shinyUI(
                        list("Female = 0 " = "0", 
                             "Male = 1" = "1")
                        ),
-            numericInput("age", "Age in months", 0.9, min = 0.1, max = 19, step = .1),
+            numericInput("age", "Age in years", 11, min = 3, max = 19, step = .1),
             numericInput("GCS", "Initial Glasgow Coma Scale", 5, min = 3, max = 15, step = 1),
-            numericInput("TFC", "Time to follow two motor commands in days", 9, min = 0, max = 130, step = 1),
+            numericInput("TFC", "Time to follow a motor command twice in 24 hours (please input days)", 9, min = 0, max = 130, step = 1),
             selectInput("codedinj", "Mechanism of injury",
                             list(
-                                     "Pedestrian struck" =  "0",
-                                     "Passenger in MVC" =  "1",
-                                     "WHAT IS 3" = "3",
+                                     "Pedestrian struck by motor vehicle" =  "0",
+                                     "Driver or passenger in MVC" =  "1",
+                                     "What is 3 ?" = "3",
                                      "Fall" = "4"
                             )
                         ),
-            selectInput("dichsurgint", "Required urgent surgical intervention (placement of ICP monitor alone does not count)",
+            selectInput("dichsurgint", "Required urgent neuro-surgical intervention (placement of ICP monitor alone does not count)",
                         list(
                                 "No" = "0",
                                 "Yes" = "1"
@@ -37,7 +37,7 @@ shinyUI(
                                 "Yes" = "1"
                             )
                         ),
-            selectInput("dichopen", "Open TBI (at minimum, dural tear present)",
+            selectInput("dichopen", "Penetrating traumatic brain injury (at minimum with a dural tear present)",
                         list(
                                 "No" = "0",
                                 "Yes" = "1"
@@ -59,12 +59,12 @@ shinyUI(
                                 "Cerebellum / brainstem" = "4"
                             )
                         ),
-            selectInput("simplifieddepth", "Simplied depth - depth of deepest lesion",
-                        list(
-                                "Cortical only" = "0",
-                                "Corpus callosum, basal ganglia, thalamus or cerebellum / brainstem" = "1"
-                            )
-                        ),
+#            selectInput("simplifieddepth", "Simplied depth - depth of deepest lesion",
+#                        list(
+#                                "Cortical only" = "0",
+#                                "Corpus callosum, basal ganglia, thalamus or cerebellum / brainstem" = "1"
+#                            )
+#                        ),
             selectInput("dichhema", "Presence or absence of intracranial bleed",
                         list(
                                 "No" = "0",
@@ -80,7 +80,7 @@ shinyUI(
         ),
         mainPanel(
             #actionButton("go", "Click here to get the prediction"),
-            h3('Results of estimation'),
+            h3('Estimated days from the day of first command following to emergence from post traumatic amnesia'),
             verbatimTextOutput("rfPrediction")
           )
     )
